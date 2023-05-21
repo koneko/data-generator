@@ -1,0 +1,31 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0",
+    "node-fetch": "^2.6.11",
+    "tr46": "^0.0.3",
+    "webidl-conversions": "^3.0.1",
+    "whatwg-url": "^5.0.0",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg index.js -t node16-windows-x64 -o generator.exe --config package.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "pkg": {
+    "assets": [
+      "node_modules/**/*"
+    ],
+    "scripts": [
+      "index.js",
+      "headers.js"
+    ]
+  }
+}
