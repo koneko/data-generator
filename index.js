@@ -37,12 +37,12 @@ function generateCSVfromJSON (json) {
     const keys = Object.keys(json[0])
     let csv = ""
     for (let i = 0; i < keys.length; i++) {
-        csv += keys[i] + ","
+        csv += keys[i] + ";"
     }
     csv = csv.substring(0, csv.length - 1) + "\n"
     for (let i = 0; i < json.length; i++) {
         for (let j = 0; j < keys.length; j++) {
-            csv += json[i][keys[j]] + ","
+            csv += json[i][keys[j]] + ";"
         }
         csv = csv.substring(0, csv.length - 1) + "\n"
     }
@@ -80,7 +80,8 @@ function generateDate () {
     const date = new Date()
     const randomDays = Math.floor(Math.random() * 14)
     date.setDate(date.getDate() - randomDays)
-    return date.toISOString().substring(0, 10)
+    // make date DMY and seperated with :
+    return date.toLocaleDateString("en-GB").replace(/\//g, ":")
 }
 
 async function generateString (length) {
@@ -91,6 +92,8 @@ async function generateString (length) {
         const randomIndex = Math.floor(Math.random() * words.length)
         string += words[randomIndex] + " "
     }
+    // trim last space
+    string = string.substring(0, string.length - 1)
     return string
 }
 
@@ -214,6 +217,9 @@ async function run () {
     writeCSV(generateCSVfromJSON(poruke), "poruka")
     writeCSV(generateCSVfromJSON(članstva), "članstvo")
     writeCSV(generateCSVfromJSON(odnosi), "odnos")
+    // pause afte execution
+    console.log("Created files.")
+    setTimeout(() => { }, 1000)
 }
 
 run()
